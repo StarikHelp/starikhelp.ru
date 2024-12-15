@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  version: 1.0.0
+servers:
+- url: https://d5des7svqg5a2qsseq6l.apigw.yandexcloud.net
+- url: https://starikhelp.ru
+- url: https://xn--80akijohjgj7c.xn--p1ai
+paths:
+  /:
+    get:
+      operationId: file-index
+      summary: Serve static index file from Object Storage
+      x-yc-apigateway-integration:
+        type: object_storage
+        bucket: starikhelp-ru
+        object: index.html
+        error_object: index.html
+        presigned_redirect: false
+        service_account_id: {{service_account_id}}
+      responses:
+        200:
+          description: 'HTML page static content'
+          content:
+            'text/plain':
+                schema:
+                  type: string
+  /{file+}:
+    get:
+      operationId: file-static
+      summary: Serve static files from Object Storage
+      x-yc-apigateway-integration:
+        type: object_storage
+        bucket: starikhelp-ru
+        object: '{file}'
+        presigned_redirect: false
+        service_account_id: {{service_account_id}}
+      parameters:
+        - name: file
+          explode: false
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HTML pages static content'

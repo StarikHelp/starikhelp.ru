@@ -1,0 +1,26 @@
+[
+  {
+    "name": "JavaScript",
+    "slug": "javascript"
+  },
+  {
+    "name": "TypeScript",
+    "slug": "typescript"
+  },
+  {
+    "name": "Svelte",
+    "slug": "svelte"
+  },
+  {
+    "name": "Azure",
+    "slug": "azure"
+  },
+  {
+    "name": "GraphQL",
+    "slug": "graphql"
+  },
+  {
+    "name": "WordPress",
+    "slug": "wordpress"
+  }
+]

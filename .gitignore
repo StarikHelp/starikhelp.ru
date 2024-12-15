@@ -1,0 +1,36 @@
+test-results
+node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+/dist
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ENV
+.env
+.env.*
+!.env.example
+!.env.test
+
+# YML
+.openapi.yml
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Package Managers
+package-lock.json
+pnpm-lock.yaml
+bun.lockb
+
+# test data
+/.data

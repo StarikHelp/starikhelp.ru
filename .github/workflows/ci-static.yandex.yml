@@ -1,0 +1,44 @@
+name: Static workflow
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events but only for the "static" branch
+  push:
+    branches: [static.yandex]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Set up Node.js
+        uses: actions/setup-node@master
+        with:
+          node-version: '20.11.1'
+          cache: 'yarn'
+
+      - name: Build static
+        env:
+          PUBLIC_APP_NAME: ${{ vars.PUBLIC_APP_NAME }}
+          PUBLIC_APP_DOMAIN: ${{ vars.PUBLIC_APP_DOMAIN }}
+          PRIVATE_ENCRYPT_KEY: ${{ vars.PRIVATE_ENCRYPT_KEY }}
+
+        run: |
+          yarn
+          yarn build
+
+      # https://github.com/marketplace/actions/yandex-cloud-s3-sync
+      - name: Sync and upload to Object Storage
+        uses: sergeevpasha/yandex-cloud-s3-sync-github-actions@v0.1.0
+        with:
+          YANDEX_CLOUD_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          YANDEX_CLOUD_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          YANDEX_CLOUD_BUCKET_NAME: ${{ vars.AWS_S3_BUCKET }}
+          PATH: './build'
+          CLEAR: true
