@@ -1,5 +1,5 @@
 {
-	"name": "starikhelp",
+	"name": "starikhelp.ru",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -7,7 +7,10 @@
 	"homepage": "https://starikhelp.ru",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ADITserv/starikhelp"
+		"url": "https://github.com/StarikHelp/starikhelp.ru"
+	},
+	"bugs": {
+		"url": "https://github.com/StarikHelp/starikhelp.ru/issues"
 	},
 	"author": {
 		"name": "Denis Glebko",
